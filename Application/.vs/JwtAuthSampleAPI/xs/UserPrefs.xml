@@ -1,0 +1,43 @@
+﻿<Properties StartupConfiguration="{57E8F9AB-42FF-448B-8673-3888EC00934D}|CookieAuthSampleAPI">
+  <MonoDevelop.Ide.Workbench ActiveDocument="JwtAuthSampleAPI/Migrations/20200123192549_First.cs">
+    <Files>
+      <File FileName="JwtAuthSampleAPI/Controllers/ArticleController.cs" Line="59" Column="41" />
+      <File FileName="JwtAuthSampleAPI/Models/Article.cs" Line="1" Column="1" />
+      <File FileName="JwtAuthSampleAPI/Models/ApplicationUser.cs" Line="16" Column="43" />
+      <File FileName="JwtAuthSampleAPI/Models/UserDetails.cs" Line="1" Column="1" />
+      <File FileName="JwtAuthSampleAPI/Models/LogInUser.cs" Line="15" Column="31" />
+      <File FileName="JwtAuthSampleAPI/Models/ArticleUser.cs" Line="1" Column="1" />
+      <File FileName="JwtAuthSampleAPI/Models/LoginCredentials.cs" Line="1" Column="1" />
+      <File FileName="JwtAuthSampleAPI/Models/Keys.cs" Line="9" Column="1" />
+      <File FileName="JwtAuthSampleAPI/Models/NewsApiResponse.cs" Line="13" Column="1" />
+      <File FileName="JwtAuthSampleAPI/Migrations/ApplicationDbContextModelSnapshot.cs" Line="1" Column="1" />
+      <File FileName="JwtAuthSampleAPI/Migrations/20201011230350_InitialDataModels.cs" Line="1" Column="1" />
+      <File FileName="JwtAuthSampleAPI/Migrations/20200123192549_First.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="JwtAuthSampleAPI" expanded="True">
+            <Node name="JwtAuthSampleAPI" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Migrations" expanded="True">
+                <Node name="20200123192549_First.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.JwtAuthSampleAPI PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
