@@ -1,13 +1,16 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using JwtAuthSampleAPI.Configuration;
+using JwtAuthSampleAPI.Data;
 using JwtAuthSampleAPI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -19,11 +22,25 @@ namespace JwtAuthSampleAPI.Controllers
     {
         private readonly JwtBearerTokenSettings jwtBearerTokenSettings;
         private readonly UserManager<ApplicationUser> userManager;
+        private ApplicationDbContext _context;
 
-        public AuthController(IOptions<JwtBearerTokenSettings> jwtTokenOptions, UserManager<ApplicationUser> userManager)
+        public AuthController(ApplicationDbContext context, IOptions<JwtBearerTokenSettings> jwtTokenOptions, UserManager<ApplicationUser> userManager)
         {
             this.jwtBearerTokenSettings = jwtTokenOptions.Value;
             this.userManager = userManager;
+            this._context = context;
+        }
+
+        [HttpGet]
+        [Route("UserInfo")]
+        public async Task<IActionResult> UserInfo()
+        {
+            ClaimsPrincipal currentUser = User;
+
+            var user = await _context.Users.Where(user => user.UserName == currentUser.Identity.Name).Select(
+            user => new { user.Id, user.Email, user.UserName }).FirstAsync();
+
+            return Ok(new { user });
         }
 
         [HttpPost]

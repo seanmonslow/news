@@ -32,22 +32,8 @@ namespace JwtAuthSampleAPI.Controllers
         }
 
         [HttpGet]
-        [Route("new")]
-        public async Task<IActionResult> New()
-        {
-
-            ClaimsPrincipal currentUser = User;
-
-            var user = await _context.Users.Where(user => user.UserName == currentUser.Identity.Name).Select(
-            user => new { user.Id, user.Email, user.UserName }).FirstAsync();
-
-            return Ok(new { user });
-
-        }
-
-        [HttpGet]
-        [Route("NewArticles")]
-        public async Task<IActionResult> getNewsArticles()
+        [Route("GetNewArticles")]
+        public async Task<IActionResult> getNewArticles()
         {
 
             ClaimsPrincipal currentUser = User;
@@ -60,10 +46,53 @@ namespace JwtAuthSampleAPI.Controllers
 
         }
 
-        /*public async Task<IActionResult> createArticleReview()
+        [HttpPost]
+        [Route("CreateArticleReview")]
+        public async Task<IActionResult> createArticleReview([FromBody] ArticleUser model)
         {
-            return Ok(new { "hello" });
-        }*/
+
+            ClaimsPrincipal currentUser = User;
+
+            var user = await ApplicationUser.GenerateUserIdentityAsync(_context, currentUser.Identity.Name);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            bool exists = (from articleUsers in _context.ArticleUser
+                           where articleUsers.User.Id == user.Id && articleUsers.Article.id == model.Article.id
+                           select articleUsers).Any();
+
+            if (exists)
+            {
+                return new BadRequestObjectResult(new { Message = "Already reviewed" });
+            }
+
+            var articleUser = new ArticleUser { };
+
+            articleUser.Like = model.Like;
+
+            ApplicationUser exisitingUser = _context.Users.FirstOrDefault(u => u.Id == user.Id);
+
+            articleUser.User = exisitingUser;
+
+            Article exisitingArticle = _context.Article.FirstOrDefault(a => a.id == model.Article.id);
+
+            if(exisitingArticle == null)
+            {
+                return new BadRequestObjectResult(new { Message = "Article doesn't exist" });
+            }
+
+            articleUser.Article = exisitingArticle;
+
+            _context.Add(articleUser);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "Review successfully created" });
+
+        }
 
         public static implicit operator ArticleController(ApplicationDbContext v)
         {

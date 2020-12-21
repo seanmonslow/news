@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 
 namespace JwtAuthSampleAPI.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
